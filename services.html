@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Forum Sports Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="offCanvasMenu" class="off-canvas-menu">
+        <button id="closeMenu" class="close-menu-btn"><i class="fas fa-times"></i></button>
+        <nav class="off-canvas-nav">
+            <a href="services.html">Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="news.html">News</a>
+            <a href="index.html#contact">Contact</a> 
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="img/my-logo.png" alt="Company Logo" class="logo-img"></a>
+        </div>
+        <nav class="desktop-nav">
+            <a href="services.html" class="nav-link-effect">Services</a>
+            <a href="team.html" class="nav-link-effect">Our Team</a>
+            <a href="news.html" class="nav-link-effect">News</a>
+            <a href="index.html#contact" class="nav-link-effect">Contact</a>
+        </nav>
+        <button id="openMenu" class="nav-toggle" aria-label="Open navigation menu"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <main>
+        <section class="section-padding stagger-reveal" style="padding-bottom: 0;">
+            <h1 class="title stagger-item">OUR STRATEGIC SERVICE PLATFORM</h1>
+            <p class="subtitle stagger-item">We offer a complete 360° management approach, driven by strategy and engineered for long-term success.</p>
+        </section>
+
+        <section id="services" class="section-padding" style="padding-top: 2rem;">
+            <div class="service-grid">
+
+                <div id="management" class="service-card stagger-reveal digital-hover">
+                    <div class="stagger-item">
+                        <i class="fas fa-user-tie icon"></i>
+                        <h3>CAREER MANAGEMENT</h3>
+                        <p>Specialized logistical support, tailored career path development, and access to a global network of top-tier clubs. We handle the complexity so you can focus on the performance.</p>
+                    </div>
+                </div>
+                
+                <div id="marketing" class="service-card stagger-reveal digital-hover">
+                    <div class="stagger-item">
+                        <i class="fas fa-bullhorn icon"></i>
+                        <h3>BRAND & MARKETING</h3>
+                        <p>Strategic personal brand development, digital content monetization, and securing high-value international and local endorsement partnerships.</p>
+                    </div>
+                </div>
+                <div id="performance" class="service-card stagger-reveal digital-hover">
+                    <div class="stagger-item">
+                        <i class="fas fa-chart-line icon"></i>
+                        <h3>PERFORMANCE & DATA ANALYTICS</h3>
+                        <p>Cutting-edge performance monitoring, bespoke data analytics, and injury prevention strategies developed by our in-house team of sports scientists and data analysts.</p>
+                    </div>
+                </div>
+
+                <div id="wealth" class="service-card stagger-reveal digital-hover">
+                    <div class="stagger-item">
+                        <i class="fas fa-dollar-sign icon"></i>
+                        <h3>WEALTH & LEGAL SECURITY</h3>
+                        <p>Specialized financial planning, investment strategies, and expert legal counsel to ensure long-term wealth protection and maximum contract security.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        </main>
+
+    <footer class="footer">
+        <div class="detailed-footer">
+            &copy; 2025 Forum Sports Management. All rights reserved. | 
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openMenu = document.getElementById('openMenu');
+            const closeMenu = document.getElementById('closeMenu');
+            const offCanvasMenu = document.getElementById('offCanvasMenu');
+
+            if (openMenu && closeMenu && offCanvasMenu) {
+                openMenu.addEventListener('click', () => {
+                    offCanvasMenu.classList.add('open');
+                });
+
+                closeMenu.addEventListener('click', () => {
+                    offCanvasMenu.classList.remove('open');
+                });
+
+                offCanvasMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        offCanvasMenu.classList.remove('open');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

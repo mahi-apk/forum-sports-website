@@ -1,0 +1,1075 @@
+/* RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #0D0D0D; 
+    --color-secondary: #FFFFFF; 
+    --color-accent: #00FFFF; /* Electric Blue Accent */
+    --color-hover: #00B3B3; 
+    --color-form-bg: #1A1A1A;
+    --font-stack: 'BlenderPro', 'Inter', sans-serif; 
+    --color-grey: rgba(255, 255, 255, 0.7); /* Defined a consistent grey for snippet text */
+}
+
+/* CUSTOM FONT DEFINITION (Must be in the 'css' folder) */
+@font-face {
+    font-family: 'BlenderPro';
+    src: url('BlenderPro-BoldItalic[7860].ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: var(--font-stack); 
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* 🌟 FIX: NAVIGATION OFFSET FOR FIXED HEADER */
+#services, #team, #news, #contact, #about, #services-home, #team-home, #news-home {
+    scroll-margin-top: 100px; 
+}
+
+/* Global Link Styling: Remove general underline by default */
+a {
+    text-decoration: none; /* Globally removes the underline from all links */
+    color: inherit; /* Ensures link color is inherited unless specifically styled */
+}
+
+
+/* TYPOGRAPHY & HEADERS */
+.title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); 
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+}
+
+.title:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-accent);
+    margin: 1rem auto 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 🌟 REDUCED SECTION GAP (Changed from 8rem to 6rem) */
+.section-padding {
+    padding: 6rem 5%; 
+}
+
+/* 1. HEADER & NAVIGATION (Minimal, Transparent Ribbon) */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+    background: transparent; 
+    backdrop-filter: none;
+    border-bottom: none;
+    transition: background 0.3s, border-bottom 0.3s;
+}
+
+.logo-img {
+    /* Set logo height to 50px */
+    height: 50px; 
+    width: auto;
+}
+
+/* Desktop Navigation Bar */
+.desktop-nav {
+    display: none; 
+    gap: 2.5rem;
+}
+.desktop-nav a {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    /* text-decoration: none; - Handled by global rule */
+    transition: color 0.3s;
+}
+
+/* DEFY-STYLE NAVIGATION HOVER EFFECT */
+.nav-link-effect {
+    position: relative;
+    padding-bottom: 5px; 
+}
+
+.nav-link-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.nav-link-effect:hover {
+    color: transparent; 
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.nav-link-effect:hover::after {
+    width: 100%; 
+}
+
+.nav-toggle {
+    background: none;
+    border: none;
+    color: var(--color-accent);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-toggle:hover {
+    color: var(--color-hover);
+}
+
+/* OFF-CANVAS MENU STYLES */
+.off-canvas-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--color-primary);
+    z-index: 3000;
+    overflow-x: hidden;
+    transition: width 0.5s cubic-bezier(0.77, 0, 0.175, 1), transform 0.5s;
+    padding-top: 6rem;
+    text-align: center;
+    border-left: 5px solid var(--color-accent);
+    transform: translateX(100%);
+}
+
+.off-canvas-menu.open {
+    width: 100%;
+    transform: translateX(0%);
+}
+
+.close-menu-btn {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    background: none;
+    border: none;
+    color: var(--color-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-menu-btn:hover {
+    color: var(--color-accent);
+}
+
+.off-canvas-nav a {
+    font-size: 2.5rem;
+    font-weight: 900; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-secondary);
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.off-canvas-nav a:hover {
+    color: var(--color-accent);
+    transform: translateX(-5px);
+}
+
+/* 2. HERO SECTION */
+.hero-section {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #000; 
+}
+
+.hero-content .tagline {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+}
+
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; 
+    background-position: center;
+    opacity: 0;
+    transition: opacity 3s ease-in-out; 
+    filter: brightness(0.6) grayscale(20%); 
+    will-change: opacity, transform, filter; 
+}
+
+/* Slide Images - Using relative paths for local images (assuming the CSS is in the 'css' folder) */
+.slide-1 { 
+    background-image: url('../img/hero-1.jpg'); 
+}
+.slide-2 { 
+    background-image: url('../img/hero-2.jpg'); 
+}
+.slide-3 { 
+    background-image: url('../img/hero-3.jpg'); 
+}
+.slide-4 { 
+    background-image: url('../img/hero-4.jpg'); 
+}
+.slide-5 { 
+    background-image: url('../img/hero-5.jpg'); 
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.video-overlay {
+    z-index: 2;
+}
+.hero-content {
+    z-index: 3;
+}
+
+/* Movement Animations (Scroll Left/Right/Top/Bottom effects) */
+@keyframes pan-left {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+@keyframes pan-right {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes pan-up {
+    0% { background-position: 50% 100%; }
+    100% { background-position: 50% 0%; }
+}
+@keyframes pan-down {
+    0% { background-position: 50% 0%; }
+    100% { background-position: 50% 100%; }
+}
+
+.slide.move-left {
+    animation: pan-left 8s linear infinite alternate; 
+}
+.slide.move-right {
+    animation: pan-right 8s linear infinite alternate;
+}
+.slide.move-up {
+    animation: pan-up 8s linear infinite alternate;
+}
+.slide.move-down {
+    animation: pan-down 8s linear infinite alternate;
+}
+
+/* 🌟 HERO ANIMATION: SLAM AND GLITCH */
+.hero-reveal {
+    opacity: 0;
+    transform: translateY(20px) skewY(5deg);
+    animation: slamAndSlide 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slamAndSlide {
+    0% { 
+        opacity: 0; 
+        transform: translateY(30px) skewY(10deg); 
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) skewY(0deg); 
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); 
+    }
+}
+
+.hero-content .hero-reveal:nth-child(1) { animation-delay: 0.1s; } 
+.hero-content .hero-reveal:nth-child(2) { animation-delay: 0.2s; } 
+.hero-content .hero-reveal:nth-child(3) { animation-delay: 0.4s; } 
+
+
+/* SECTION REVEAL ANIMATION (Smooth Slide-in from Right) */
+.stagger-reveal {
+    opacity: 0; 
+    transform: translateX(100px); 
+    transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.8s ease-out; 
+}
+
+.stagger-reveal.visible {
+    opacity: 1;
+    transform: translateX(0); 
+}
+
+/* Individual Staggered Items (Smooth Slide-up) */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stagger-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* HIGH-TECH EFFECT: DIGITAL GLITCH/SCANNER HOVER (Kept) */
+.digital-hover {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* FIX: Remove background color change on hover, rely on default card background */
+}
+
+.digital-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; 
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 255, 0.3) 0%,
+        rgba(0, 255, 255, 0) 50%,
+        rgba(0, 255, 255, 0.3) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    transform: skewX(-20deg) scaleX(0); 
+}
+
+.digital-hover:hover::before {
+    opacity: 1;
+    transform: skewX(-20deg) scaleX(1.5);
+    animation: digitalScan 1.2s infinite linear; 
+}
+
+@keyframes digitalScan {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 3. ABOUT US SECTION */
+.about-content { max-width: 900px; margin: 0 auto; text-align: center; }
+.about-content .description { font-size: 1.3rem; margin-bottom: 4rem; font-weight: 300; }
+
+
+/* 4. NEWS/HIGHLIGHTS SECTION (Home Page Carousel) */
+.news-section {
+    position: relative; /* Needed for carousel arrows */
+}
+
+/* --- News Carousel Styles (for Index Page) --- */
+.carousel-container {
+    position: relative;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 5%; /* Adjusted padding to match section padding for mobile, arrows sit on top */
+}
+
+/* The element that contains all the news cards and handles horizontal scrolling */
+.news-grid-carousel {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 20px; /* Space between cards */
+    padding: 10px 0; /* Vertical padding for better look */
+    -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+    
+    /* Hide scrollbar for cleaner look (optional but common for carousels) */
+    scrollbar-width: none; /* Firefox */
+}
+
+.news-grid-carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Styling for each individual news card within the carousel */
+.news-grid-carousel .news-card {
+    flex: 0 0 calc(33.333% - 13.333px); /* Show 3 cards (100% / 3 - space for 2 gaps) */
+    min-width: 300px; /* Ensures minimum size */
+    scroll-snap-align: start;
+    background-color: var(--color-form-bg); 
+    border-bottom: 3px solid var(--color-accent); 
+    padding-bottom: 2rem; 
+}
+
+/* Carousel Navigation Arrows */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-accent);
+    color: var(--color-primary); /* Changed to primary for contrast */
+    border: none;
+    padding: 12px 18px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, opacity 0.3s;
+    border-radius: 50%; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-nav:hover {
+    background-color: var(--color-hover);
+    color: var(--color-secondary);
+}
+
+.prev-btn {
+    left: 20px; /* Aligned inside the container */
+}
+
+.next-btn {
+    right: 20px; /* Aligned inside the container */
+}
+
+/* Hide arrows when they are not needed (handled by JS) */
+.carousel-nav.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* --- News Archive Grid Fixes (For news.html) --- */
+
+.news-grid {
+    display: grid;
+    /* Desktop: 3 columns */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-grid .news-card {
+    background-color: var(--color-form-bg); /* Use consistent background color */
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 3px solid var(--color-accent); /* Keep the accent border */
+    padding-bottom: 0; /* Remove extra padding for the "read more" footer */
+    min-width: unset; /* Override carousel min-width */
+}
+
+/* Enforce better image aspect ratio (e.g., 1:1 for square images) */
+.news-grid .news-photo {
+    position: relative;
+    width: 100%;
+    /* 🌟 FIX: Changed from 60% (5:3) to 100% (1:1) to match 1080x1080 image ratio */
+    padding-top: 100%; 
+    height: unset; /* Override existing fixed height */
+    overflow: hidden;
+    margin-bottom: 0; /* Adjust spacing */
+}
+
+/* Image inside the container: Ensures it covers the area */
+.news-grid .news-photo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes sure the image covers the div without distortion */
+    display: block;
+}
+
+/* Content below the image */
+.news-grid .news-card a {
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    padding: 20px; /* Padding for content area */
+}
+
+/* General Link and Read More Link Underline Removal */
+.news-grid a,
+.read-more-link {
+    text-decoration: none !important; /* Force removal of underline */
+}
+
+.news-grid h3 { 
+    font-size: 1.3rem; 
+    line-height: 1.4; 
+    padding: 0; /* Remove padding if added by carousel styles */
+}
+
+.news-grid .news-snippet {
+    padding: 0; /* Remove padding if added by carousel styles */
+    font-size: 0.95rem; /* Slightly smaller snippet */
+    color: var(--color-grey); 
+    margin: 0.5rem 0 1rem;
+}
+
+.news-grid .news-meta { 
+    font-size: 0.8rem; 
+    color: var(--color-accent); 
+    font-weight: 700; 
+    padding: 0; /* Remove padding if added by carousel styles */
+    margin-bottom: 0.5rem;
+}
+
+.news-grid .news-footer {
+    padding: 0 20px 20px 20px;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.news-grid .read-more-link {
+    color: var(--color-accent); /* Use a secondary or accent color for this link */
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.news-grid .read-more-link:hover {
+    color: var(--color-hover);
+}
+
+
+/* --- Single Article Page Adjustments --- */
+.single-article-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.article-container {
+    display: flex;
+    gap: 4rem;
+}
+.article-content-column {
+    flex: 3;
+}
+.article-sidebar-column {
+    flex: 1;
+    min-width: 250px;
+}
+.article-meta span {
+    margin-right: 15px;
+    color: var(--color-accent);
+}
+.article-image img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.sidebar-widget {
+    background-color: var(--color-form-bg);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 3px solid var(--color-accent);
+}
+.sidebar-widget h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.sidebar-widget ul {
+    list-style: none;
+}
+.sidebar-widget li a {
+    display: block;
+    padding: 5px 0;
+    color: var(--color-grey);
+    transition: color 0.3s;
+}
+.sidebar-widget li a:hover {
+    color: var(--color-accent);
+    /* Ensure no underline */
+    text-decoration: none; 
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--color-grey);
+}
+.prev-post span, .next-post span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.prev-post a, .next-post a {
+    font-size: 1rem;
+    transition: color 0.3s;
+    font-weight: 700;
+}
+.prev-post a:hover, .next-post a:hover {
+    color: var(--color-accent);
+}
+
+.you-may-like h2 {
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.related-posts-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.related-post-card {
+    flex: 1;
+    background-color: var(--color-form-bg);
+    padding: 20px;
+    border-left: 3px solid var(--color-accent);
+}
+.related-post-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+.related-post-card .date {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+
+/* --- News Carousel Image Fix (For index.html) --- */
+
+.news-grid-carousel .news-photo {
+    /* 🌟 FIX: Applied the 1:1 Aspect Ratio (100%) to match 1080x1080 images */
+    position: relative;
+    width: 100%;
+    padding-top: 100%; 
+    height: unset; 
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.news-grid-carousel .news-photo img {
+    /* 🌟 FIX: Ensured the image is absolutely positioned to cover the padding container */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Original Card Text styles (used by carousel) */
+.news-card:hover .news-photo img {
+    transform: scale(1.05);
+}
+
+.news-card h3 { 
+    font-size: 1.3rem; 
+    line-height: 1.4; 
+    padding: 0 1.5rem;
+}
+
+.news-snippet {
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 1rem 0;
+}
+
+.news-meta { 
+    font-size: 0.9rem; 
+    color: var(--color-accent); 
+    font-weight: 700; 
+    padding: 1.5rem 1.5rem 0;
+}
+
+.news-footer {
+    padding: 0 1.5rem;
+    margin-top: 1.5rem;
+}
+
+
+/* 5. SERVICES SECTION (Used on services.html and index.html) */
+.service-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* Back to 4 columns, assuming you fixed services.html */
+    gap: 1.5rem; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+/* SPORTY/PREMIUM CARD HOVER (3D Tilt Kept) */
+.service-link-card {
+    /* text-decoration: none; - Handled by global rule */
+    color: inherit; 
+    display: block; 
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.service-card {
+    background-color: var(--color-form-bg);
+    padding: 2.5rem 1.5rem; 
+    border-top: 5px solid transparent; 
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    height: 100%; 
+}
+
+.service-link-card:hover {
+    transform: rotateX(5deg) rotateY(-3deg) translateZ(15px); 
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4); 
+}
+
+.service-link-card:hover .service-card {
+    border-top-color: var(--color-accent); 
+}
+
+.service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; text-transform: uppercase; }
+.service-card .icon { font-size: 3.5rem; color: var(--color-accent); display: block; margin-bottom: 1.5rem; }
+
+
+/* 6. OUR TEAM / ROSTER SECTION (Used on team.html and index.html) */
+.team-section { text-align: center; }
+
+/* 🌟 FIX: Full team roster grid (used on team.html) */
+.employee-list-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    gap: 2rem; 
+    max-width: 1000px; 
+    margin: 0 auto 4rem; 
+    text-align: left;
+}
+
+.employee-card {
+    background-color: var(--color-form-bg);
+    padding: 2rem;
+    border-left: 5px solid var(--color-accent);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.employee-card:hover {
+    background-color: #242424; 
+    transform: translateY(-5px);
+}
+
+.employee-card h3 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.employee-title {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.employee-card p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 🌟 FIX: Employee Summary Styles (for Homepage - side by side layout) */
+.employee-summary-grid {
+    display: flex; /* Use flexbox for side-by-side */
+    justify-content: center; /* Center the two cards on the page */
+    gap: 30px; /* Space between the two team cards */
+    max-width: 800px; 
+    margin: 0 auto 2rem; 
+}
+
+.employee-summary {
+    flex: 1 1 45%; /* Allows card to grow/shrink and starts at 45% width */
+    text-align: center;
+}
+.employee-photo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    overflow: hidden;
+    /* Rounded square/squircle shape */
+    border-radius: 15px;
+    border: 3px solid var(--color-accent);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    /* Added position: relative for internal image positioning */
+    position: relative; 
+}
+.employee-photo img {
+    width: 100%;
+    height: 100%;
+    /* FINAL FIX: Auto-adjusts size and crops to fill the frame */
+    object-fit: cover;
+    display: block;
+}
+
+
+/* 7. CONTACT SECTION */
+.contact-section { background-color: #000000; }
+.contact-container { display: flex; gap: 4rem; max-width: 1200px; margin: 0 auto; }
+.contact-form { flex: 2; }
+.contact-info { flex: 1; padding: 2rem 0; }
+.contact-info h3 { font-size: 2rem; color: var(--color-accent); margin-bottom: 1rem; font-weight: 900; }
+.contact-info p { margin-bottom: 0.5rem; }
+.email-info { margin-top: 1.5rem; font-size: 1.1rem; font-weight: 700; color: var(--color-secondary); }
+.form-group { margin-bottom: 1.5rem; }
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { width: 100%; padding: 1rem; background-color: var(--color-form-bg); border: 1px solid #333; color: var(--color-secondary); font-size: 1rem; border-radius: 4px; transition: border-color 0.3s, box-shadow 0.3s; }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+.contact-form textarea { resize: vertical; }
+.social-links { margin-top: 2rem; }
+.social-links a { font-size: 1.5rem; margin-right: 1.5rem; color: var(--color-secondary); }
+.social-links a:hover { color: var(--color-accent); }
+
+/* NEW: Read More Link Styling (Used in services/team on homepage) */
+.read-more-wrapper {
+    margin-top: 2rem;
+}
+.read-more-link {
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-weight: 700;
+    /* text-decoration: none; - Handled by global rule */
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s;
+}
+.read-more-link:hover {
+    border-bottom: 1px solid var(--color-accent);
+}
+
+
+/* 🌟 BUTTON STYLES */
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-primary:hover {
+    background: var(--color-hover);
+    color: var(--color-secondary); 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.8);
+}
+
+/* 8. FOOTER */
+.footer { 
+    padding: 2rem 5%; 
+    text-align: center; 
+    font-size: 0.85rem; 
+    color: rgba(255, 255, 255, 0.5); 
+    border-top: 1px solid #1a1a1a; 
+}
+.detailed-footer {
+    padding: 1rem 5%;
+    font-size: 0.9rem;
+}
+.detailed-footer a {
+    color: rgba(255, 255, 255, 0.5);
+    /* text-decoration: none; - Handled by global rule */
+    transition: color 0.3s;
+}
+.detailed-footer a:hover {
+    color: var(--color-accent);
+}
+
+/* --- Social Links in Footer --- */
+.social-links-footer {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #1a1a1a;
+}
+.social-links-footer a {
+    font-size: 1.5rem;
+    margin: 0 0.8rem;
+    color: var(--color-secondary);
+    opacity: 0.6;
+    transition: color 0.3s, opacity 0.3s;
+}
+.social-links-footer a:hover {
+    color: var(--color-accent);
+    opacity: 1;
+}
+/* --- End Social Links in Footer --- */
+
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+@media (max-width: 1200px) { 
+    .article-container {
+        flex-direction: column;
+    }
+    .article-sidebar-column {
+        min-width: unset;
+        width: 100%;
+    }
+}
+@media (max-width: 1024px) { 
+    /* Adjusting service grid for the homepage to look better */
+    .service-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .employee-list-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    } 
+    /* News grid now uses flex for the carousel, not grid */
+    .success-details {
+        padding: 0;
+    }
+}
+@media (min-width: 769px) {
+    .desktop-nav {
+        display: flex;
+    }
+    .nav-toggle {
+        display: none;
+    }
+}
+@media (max-width: 768px) { 
+    .hero-content h1 { 
+        font-size: 3rem; 
+    } 
+    .title { 
+        font-size: 2.5rem; 
+    } 
+    .desktop-nav {
+        display: none;
+    }
+    .nav-toggle {
+        display: block;
+    }
+    .service-grid { 
+        grid-template-columns: 1fr; 
+    } 
+    .employee-list-grid { 
+        grid-template-columns: 1fr; 
+    } 
+    .contact-container { 
+        flex-direction: column; 
+        gap: 2rem; 
+    } 
+    /* Stats grid removed */
+    .about-content .description { 
+        font-size: 1.1rem; 
+    } 
+    
+    /* Carousel Adjustments for Mobile */
+    .news-grid-carousel .news-card {
+        flex: 0 0 calc(100% - 40px); /* Show 1 full card width, leaving room for a glimpse of the next */
+    }
+    .prev-btn {
+        left: 0px; 
+    }
+    .next-btn {
+        right: 0px; 
+    }
+    
+    .featured-success-item {
+        gap: 1.5rem;
+    }
+    .post-navigation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    .prev-post, .next-post {
+        max-width: 100%;
+        text-align: left;
+    }
+    .related-posts-grid {
+        flex-direction: column;
+    }
+    /* News Archive Grid Fixes for Mobile */
+    .news-grid .news-card {
+        min-width: 100%;
+    }
+    /* 🌟 FIX: Stacks employee summaries vertically on small screens */
+    .employee-summary-grid {
+        flex-direction: column; 
+        gap: 40px;
+    }
+}
+
+/* ==================================== */
+/* !!! IMAGE APPEARANCE TROUBLESHOOTING !!! */
+/* ==================================== */
+
+.article-image {
+    /* Ensure the container itself can expand */
+    overflow: hidden; 
+    padding: 0;
+    margin: 0;
+}
+
+.fix-size {
+    /* FORCES the image to take up space and stretch to fit the width */
+    display: block !important;
+    width: 100% !important;
+    height: auto !important; /* Ensure height scales proportionally */
+    min-height: 200px !important; /* Forces the image to have a minimum visible area */
+    object-fit: contain !important; /* Use 'contain' to see the whole image if it was too large, without cropping. If the image appears with white space, change this to 'cover'. */
+    background-color: #333; /* Temporary background color to see the container */
+    border: 2px solid red; /* Temporary border to clearly see the frame */
+}
