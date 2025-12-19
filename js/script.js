@@ -1,56 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. OFF-CANVAS MENU LOGIC (Existing Functionality) ---
+    // --- 1. OFF-CANVAS MENU LOGIC ---
     const openMenu = document.getElementById('openMenu');
     const closeMenu = document.getElementById('closeMenu');
     const offCanvasMenu = document.getElementById('offCanvasMenu');
 
     if (openMenu && closeMenu && offCanvasMenu) {
-        openMenu.addEventListener('click', () => {
-            offCanvasMenu.classList.add('open');
-        });
+        // Function to Toggle Menu
+        const toggleMenu = (state) => {
+            if (state === 'open') {
+                offCanvasMenu.classList.add('active'); // Matches CSS .active
+                document.body.style.overflow = 'hidden'; // Prevents background scroll when menu is open
+            } else {
+                offCanvasMenu.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enables scroll
+            }
+        };
 
-        closeMenu.addEventListener('click', () => {
-            offCanvasMenu.classList.remove('open');
-        });
+        openMenu.addEventListener('click', () => toggleMenu('open'));
+        closeMenu.addEventListener('click', () => toggleMenu('close'));
 
-        // Close menu on link click
+        // Close menu on link click (important for mobile UX)
         offCanvasMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                offCanvasMenu.classList.remove('open');
-            });
+            link.addEventListener('click', () => toggleMenu('close'));
         });
     }
 
-    // --- 2. NEWS CAROUSEL LOGIC (New Functionality) ---
+    // --- 2. NEWS CAROUSEL LOGIC ---
     const carousel = document.getElementById('newsCarousel');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
     
     if (carousel && prevBtn && nextBtn) {
         
-        // Function to check scroll position and update button visibility
         const updateNavButtons = () => {
-            // Check if scroll is at the very beginning (0)
-            const isStart = carousel.scrollLeft <= 1; // Added a 1px tolerance for edge cases
+            const isStart = carousel.scrollLeft <= 5; 
+            const isEnd = Math.ceil(carousel.scrollLeft + carousel.clientWidth) >= carousel.scrollWidth - 5; 
             
-            // Check if scroll is at the very end
-            // scrollWidth is total width, clientWidth is visible width
-            const isEnd = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1; 
-            
-            // Hide Prev button at the start, show otherwise
-            prevBtn.classList.toggle('hidden', isStart);
-            
-            // Hide Next button at the end, show otherwise
-            nextBtn.classList.toggle('hidden', isEnd);
+            prevBtn.style.display = isStart ? 'none' : 'block';
+            nextBtn.style.display = isEnd ? 'none' : 'block';
         };
         
         // Scroll Next
         nextBtn.addEventListener('click', () => {
-            // Calculate the width of one card plus the gap (assumed 20px in CSS)
             const firstCard = carousel.querySelector('.news-card');
             if (firstCard) {
-                const scrollDistance = firstCard.offsetWidth + 20; 
+                // Get dynamic card width + gap
+                const scrollDistance = firstCard.clientWidth + 20; 
                 carousel.scrollBy({ left: scrollDistance, behavior: 'smooth' });
             }
         });
@@ -59,75 +55,60 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn.addEventListener('click', () => {
             const firstCard = carousel.querySelector('.news-card');
             if (firstCard) {
-                const scrollDistance = firstCard.offsetWidth + 20;
+                const scrollDistance = firstCard.clientWidth + 20;
                 carousel.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
             }
         });
 
-        // Event listeners for updating buttons when user scrolls manually or resizes the window
         carousel.addEventListener('scroll', updateNavButtons);
         window.addEventListener('resize', updateNavButtons);
-        
-        // Initial check when the page loads
-        updateNavButtons();
+        updateNavButtons(); // Run on load
     }
     
-    // --- 3. HERO SLIDESHOW LOGIC (Existing Functionality) ---
+    // --- 3. HERO SLIDESHOW LOGIC ---
     const slides = document.querySelectorAll('.slide');
     if (slides.length > 0) {
         let currentSlide = 0;
         const totalSlides = slides.length;
-        const intervalTime = 6000; // Change image every 6 seconds
-
+        const intervalTime = 6000; 
         const animations = ['move-left', 'move-right', 'move-up', 'move-down'];
 
         function nextSlide() {
-            // Hide current slide
             slides[currentSlide].classList.remove('active', ...animations);
-
-            // Move to next slide
             currentSlide = (currentSlide + 1) % totalSlides;
-
-            // Show next slide
             slides[currentSlide].classList.add('active');
 
-            // Apply random animation
             const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
             slides[currentSlide].classList.add(randomAnimation);
         }
 
-        // Initialize the first slide
+        // Init
         slides[0].classList.add('active', animations[0]);
-
-        // Start the slideshow
         setInterval(nextSlide, intervalTime);
     }
     
-    // --- 4. SCROLL REVEAL (Staggered Animation) ---
+    // --- 4. SCROLL REVEAL (Intersection Observer) ---
     const revealSections = document.querySelectorAll('.stagger-reveal');
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
-                // Stagger the items inside the visible section
                 const staggeredItems = entry.target.querySelectorAll('.stagger-item');
                 staggeredItems.forEach((item, index) => {
                     item.style.transitionDelay = `${index * 0.1}s`; 
                     item.classList.add('in-view');
                 });
                 
-                observer.unobserve(entry.target); 
+                revealObserver.unobserve(entry.target); 
             }
         });
     }, {
-        threshold: 0.1, // Trigger when 10% of the section is visible
-        rootMargin: '0px 0px -50px 0px' // Start slightly earlier than the bottom of the viewport
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     });
 
-    revealSections.forEach(section => {
-        observer.observe(section);
-    });
+    revealSections.forEach(section => revealObserver.observe(section));
 
 });
