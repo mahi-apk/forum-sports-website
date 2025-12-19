@@ -152,57 +152,55 @@ a {
 }
 
 /* OFF-CANVAS MENU STYLES */
+/* 1. The Container that slides in */
 .off-canvas-menu {
     position: fixed;
     top: 0;
-    right: 0;
+    right: -100%; /* Keeps it off-screen until active */
+    width: 80%;    /* Width on mobile */
+    max-width: 300px;
     height: 100%;
-    width: 0;
-    background-color: var(--color-primary);
-    z-index: 3000;
-    overflow-x: hidden;
-    transition: width 0.5s cubic-bezier(0.77, 0, 0.175, 1), transform 0.5s;
-    padding-top: 6rem;
-    text-align: center;
-    border-left: 5px solid var(--color-accent);
-    transform: translateX(100%);
+    background-color: #000000; /* Matching your black theme */
+    z-index: 10000;
+    transition: 0.4s ease;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
 }
 
-.off-canvas-menu.open {
-    width: 100%;
-    transform: translateX(0%);
+/* 2. When the menu is open */
+.off-canvas-menu.active {
+    right: 0;
 }
 
-.close-menu-btn {
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
-    background: none;
-    border: none;
-    color: var(--color-secondary);
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.close-menu-btn:hover {
-    color: var(--color-accent);
+/* 3. The Navigation Links - THIS FIXES THE 'FORMING' ISSUE */
+.off-canvas-nav {
+    display: flex;
+    flex-direction: column; /* Stacks links vertically */
+    gap: 30px;              /* Space between links */
+    text-align: left;
 }
 
 .off-canvas-nav a {
-    font-size: 2.5rem;
-    font-weight: 900; 
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-family: 'BlenderPro', sans-serif; /* Using your custom font */
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-secondary);
-    position: relative;
-    padding: 0.5rem 0;
-    transition: color 0.3s, transform 0.3s;
+    border-bottom: 1px solid #333; /* Adds a nice separator line */
+    padding-bottom: 10px;
 }
 
-.off-canvas-nav a:hover {
-    color: var(--color-accent);
-    transform: translateX(-5px);
+/* 4. The Close Button */
+.close-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 /* 2. HERO SECTION */
