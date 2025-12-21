@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team - Forum Sports Management</title>
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body { background-color: #000; color: #fff; margin: 0; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #000; }
+        .logo-img { width: 180px; height: auto; }
+    </style>
 </head>
 <body>
 
@@ -22,7 +29,9 @@
 
     <header class="header">
         <div class="logo">
-            <a href="index.html"><img src="img/my-logo.png" alt="Company Logo" class="logo-img" style="height: auto; width: 180px; max-width: 100%;"></a>
+            <a href="index.html">
+                <img src="img/my-logo.png" alt="Company Logo" class="logo-img">
+            </a>
         </div>
         <nav class="desktop-nav">
             <a href="services.html" class="nav-link-effect">Services</a>
@@ -30,37 +39,39 @@
             <a href="news.html" class="nav-link-effect">News</a>
             <a href="index.html#contact" class="nav-link-effect">Contact</a>
         </nav>
-        <button id="openMenu" class="nav-toggle" aria-label="Open navigation menu"><i class="fas fa-bars"></i></button>
+        <button id="openMenu" class="nav-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     </header>
 
-    <section id="team-page" class="team-section section-padding stagger-reveal" style="padding-top: 150px;">
-        <div class="section-header">
-            <h1 class="title stagger-item">Our Team</h1>
-            <p class="subtitle stagger-item">Meet the experts who integrate market intelligence and performance data to drive unparalleled client success.</p>
-        </div>
-        
-        <div class="employee-list-grid" style="max-width: 800px; margin: 0 auto;">
-            <div id="james" class="employee-card stagger-item digital-hover" style="grid-column: 1 / -1; margin-bottom: 2rem; background: #111; padding: 2rem; border-radius: 8px;">
-                <h3 style="margin-top: 0;">James</h3>
-                <span class="employee-title" style="color: #888; font-weight: bold;">Director / FIFA Licensed Agent</span>
-                <p>James Co-founded Forum Sports Management with a vision to integrate technology and deep data analytics into talent representation. With over 15 years in the game, he has overseen over €500M in transfers and specializes in high-stakes contract negotiation across the Premier League, La Liga, and Serie A, focusing on long-term athlete legacy.</p>
-                <div class="social-links" style="margin-top: 1rem;"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+    <main>
+        <section id="team-page" class="team-section section-padding stagger-reveal" style="padding-top: 150px; min-height: 100vh;">
+            <div class="section-header">
+                <h1 class="title stagger-item">Our Team</h1>
+                <p class="subtitle stagger-item">Meet the experts who integrate market intelligence and performance data to drive unparalleled client success.</p>
             </div>
+            
+            <div class="employee-list-grid" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+                <div id="james" class="employee-card stagger-item digital-hover" style="margin-bottom: 2rem; background: #111; padding: 2rem; border-radius: 8px; border: 1px solid #222;">
+                    <h3 style="margin-top: 0; color: #fff;">James</h3>
+                    <span class="employee-title" style="color: #888;">Director / FIFA Licensed Agent</span>
+                    <p>James Co-founded Forum Sports Management with a vision to integrate technology and deep data analytics into talent representation. With over 15 years in the game, he has overseen over €500M in transfers.</p>
+                    <div class="social-links" style="margin-top: 1rem;"><a href="#" style="color: #fff;"><i class="fab fa-linkedin-in"></i></a></div>
+                </div>
 
-            <div id="lewis" class="employee-card stagger-item digital-hover" style="grid-column: 1 / -1; background: #111; padding: 2rem; border-radius: 8px;">
-                <h3 style="margin-top: 0;">Lewis</h3>
-                <span class="employee-title" style="color: #888; font-weight: bold;">Director - Head of Recruitment & Data Analyst</span>
-                <p>Lewis leads Forum Sports Management’s bespoke recruitment and performance model, drawing on extensive experience working within the Premier League and Football League. He has held roles as a tactical analyst and coach in England and across Europe, giving him a detailed understanding of the demands placed on players at the highest levels of the game.
-Having worked closely with coaching staffs, analysts, and players in elite environments, Lewis brings a practical, performance focused perspective to player development and recruitment. His work centres on understanding how players fit within tactical systems, coaching philosophies, and long term club strategies.
-Lewis is driven by a commitment to helping players maximise their potential through informed guidance and an honest understanding of what clubs are truly looking for at each stage of a player’s career.</p>
-                <div class="social-links" style="margin-top: 1rem;"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+                <div id="lewis" class="employee-card stagger-item digital-hover" style="background: #111; padding: 2rem; border-radius: 8px; border: 1px solid #222;">
+                    <h3 style="margin-top: 0; color: #fff;">Lewis</h3>
+                    <span class="employee-title" style="color: #888;">Director - Head of Recruitment & Data Analyst</span>
+                    <p>Lewis leads Forum Sports Management’s bespoke recruitment and performance model, drawing on extensive experience working within the Premier League and Football League.</p>
+                    <div class="social-links" style="margin-top: 1rem;"><a href="#" style="color: #fff;"><i class="fab fa-linkedin-in"></i></a></div>
+                </div>
             </div>
-        </div>
-        
-        <p style="text-align: center; margin-top: 3rem;"><a href="index.html" class="btn-primary transition-color stagger-item">BACK TO HOME</a></p>
-    </section>
+            
+            <p style="text-align: center; margin-top: 3rem;">
+                <a href="index.html" class="btn-primary" style="text-decoration: none; color: #fff; border: 1px solid #fff; padding: 10px 20px;">BACK TO HOME</a>
+            </p>
+        </section>
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" style="text-align: center; padding: 50px 0; border-top: 1px solid #222;">
         <p>&copy; 2025 Forum Sports Management. All Rights Reserved.</p>
     </footer>
 
